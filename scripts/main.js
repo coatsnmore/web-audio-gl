@@ -1,14 +1,8 @@
+// setup
 App.Synth.init();
-App.Controller = App.Controller || {};
-
-App.Controller.playSong = function () {
-    App.Synth.playSong();
-};
-
-App.Controller.changeSphere = function () {
-    App.Scene.changeSphere();
-}
-
 App.Scene.init();
+App.Controller.init();
+
+// kick er off
 App.Scene.animate();
 

@@ -1,6 +1,6 @@
 App.Scene = App.Scene || (function () {
 
-    var scene, renderer, camera,  sphere, sphere2;
+    var scene, renderer, camera, sphere, sphere2;
 
     var init = function () {
         // Create the scene and set the scene size.
@@ -51,13 +51,55 @@ App.Scene = App.Scene || (function () {
 
     }
 
-    var changeSphere = function (){
-        console.log('radius: ' + sphere.geometry.radius);
+    var updateSpheresByNote = function (note) {
+        //['G3', 'A#3/Bb3', 'D#4/Eb4', 'G3', 'A#3/Bb3', 'G#3/Ab3', 'G3']
         sphere.geometry.dispose();
 
-        var radius, segements, rings;
+        var radius, segments, rings;
 
-        if( sphere.size == 'big'){
+        if (note.includes('G')) {
+            radius = 1;
+            segments = 8;
+            rings = 8;
+        } else if (note.includes('A')) {
+            radius = 2;
+            segments = 8;
+            rings = 8;
+        } else if (note.includes('B')) {
+            radius = 3;
+            segments = 8;
+            rings = 8;
+        } else if (note.includes('C')) {
+            radius = 4;
+            segments = 8;
+            rings = 8;
+        } else if (note.includes('D')) {
+            radius = 5;
+            segments = 8;
+            rings = 8;
+        } else if (note.includes('E')) {
+            radius = 6;
+            segments = 8;
+            rings = 8;
+        } else if (note.includes('F')) {
+            radius = 7;
+            segments = 8;
+            rings = 8;
+        }
+
+        var geometry = new THREE.SphereGeometry(
+            radius,
+            segments,
+            rings);
+        sphere.geometry = geometry;
+    }
+
+    var changeSphere = function () {
+        sphere.geometry.dispose();
+
+        var radius, segments, rings;
+
+        if (sphere.size == 'big') {
             radius = 1;
             segments = 8;
             rings = 8;
@@ -69,7 +111,7 @@ App.Scene = App.Scene || (function () {
             sphere.size = 'big';
         }
 
-         var geometry = new THREE.SphereGeometry(
+        var geometry = new THREE.SphereGeometry(
             radius,
             segments,
             rings);
@@ -153,11 +195,19 @@ App.Scene = App.Scene || (function () {
         // Read more about requestAnimationFrame at http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
         requestAnimationFrame(animate);
 
+        // update scene
+        console.log('analysis: ' + App.Synth.analysis());
+
         // Render the scene.
         renderer.render(scene, camera);
         controls.update();
 
     }
 
-    return { init: init, animate: animate, changeSphere: changeSphere };
+    return {
+        init: init,
+        animate: animate,
+        changeSphere: changeSphere,
+        updateSpheresByNote: updateSpheresByNote
+    };
 })();

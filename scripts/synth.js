@@ -1,19 +1,25 @@
 App.Synth = App.Synth || (function () {
     var notes = App.Notes.all;
+    var controller = App.Controller;
     var context = {};
+    var analyser;
 
     var init = function () {
         createContext();
+        createAnalyser();
     };
 
     var playSong = function () {
         var duration = 0.5,
             startTime = context.currentTime,
-            song = ['G3', 'A#3/Bb3', 'D#4/Eb4', 'G3', 'A#3/Bb3', 'G#3/Ab3', 'G3'],
+            // song = ['G3', 'A#3/Bb3', 'D#4/Eb4', 'G3', 'A#3/Bb3', 'G#3/Ab3', 'G3'],
+            song = ['G3', 'G3', 'G3', 'G3', 'G3', 'G#3/Ab3', 'G3'],
             oscillatorType = 'sine',
             masterVolume = 0.1;
 
+
         for (var i = 0; i < song.length; i++) {
+            controller.updateSpheresByNote(song[i]);
             play(song[i], startTime + duration * i, duration, oscillatorType, masterVolume);
         }
     };
@@ -30,6 +36,10 @@ App.Synth = App.Synth || (function () {
             play(song[i], startTime + duration * i, duration, oscillatorType, masterVolume);
         }
     };
+
+    var createAnalyser = function () {
+        analyser = context.createAnalyser()
+    }
 
     var createContext = function () {
         // var context = {};
@@ -49,6 +59,14 @@ App.Synth = App.Synth || (function () {
         // context;
     };
 
+    var analysis = function () {
+        analyser.fftSize = 2048;
+        var bufferLength = analyser.frequencyBinCount;
+        var dataArray = new Uint8Array(bufferLength);
+        analyser.getByteTimeDomainData(dataArray);
+        return dataArray;
+    }
+
     var play = function (note, startTime, duration, type, volumeLevel) {
         var osc1 = context.createOscillator(),
             osc2 = context.createOscillator(),
@@ -66,7 +84,10 @@ App.Synth = App.Synth || (function () {
         osc2.frequency.value = frequency - 3;
 
         // wire em up
-        osc1.connect(volume);
+        osc1.connect(analyser);
+        analyser.connect(volume);
+        // osc1.connect(volume);
+
         osc2.connect(volume);
         volume.connect(context.destination);
 
@@ -86,6 +107,7 @@ App.Synth = App.Synth || (function () {
     return {
         playSong: playSong,
         playLaser: playLaser,
-        init: init
+        init: init,
+        analysis: analysis
     };
 })();
