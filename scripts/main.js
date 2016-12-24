@@ -9,5 +9,6 @@ App.Controller.changeSphere = function () {
     App.Scene.changeSphere();
 }
 
-App.Scene.setup();
+App.Scene.init();
+App.Scene.animate();
 
