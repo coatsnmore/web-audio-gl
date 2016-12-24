@@ -12,8 +12,8 @@ App.Synth = App.Synth || (function () {
     var playSong = function () {
         var duration = 0.5,
             startTime = context.currentTime,
-            // song = ['G3', 'A#3/Bb3', 'D#4/Eb4', 'G3', 'A#3/Bb3', 'G#3/Ab3', 'G3'],
-            song = ['G3', 'G3', 'G3', 'G3', 'G3', 'G#3/Ab3', 'G3'],
+            song = ['G3', 'A#3/Bb3', 'D#4/Eb4', 'G3', 'A#3/Bb3', 'G#3/Ab3', 'G3'],
+            // song = ['G3', 'G3', 'G3', 'G3', 'G3', 'G#3/Ab3', 'G3'],
             oscillatorType = 'sine',
             masterVolume = 0.1;
 
@@ -67,6 +67,10 @@ App.Synth = App.Synth || (function () {
         return dataArray;
     }
 
+     var analyser = function () {
+        return analyser;
+    }
+
     var play = function (note, startTime, duration, type, volumeLevel) {
         var osc1 = context.createOscillator(),
             osc2 = context.createOscillator(),
@@ -108,6 +112,7 @@ App.Synth = App.Synth || (function () {
         playSong: playSong,
         playLaser: playLaser,
         init: init,
-        analysis: analysis
+        analysis: analysis,
+        analyser, analyser
     };
 })();

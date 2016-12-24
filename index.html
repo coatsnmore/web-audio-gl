@@ -1,7 +1,13 @@
 <html>
 <!-- Remember.. order matters -->
+<body>
+	<button onClick="App.Controller.playSong();">play song</button>
+    <button onClick="App.Controller.changeSphere();">change sphere</button>
+
+</body>
 
 
+<canvas id="mycanvas"></canvas>
 <div id="container"></div>
 
 <!-- libraries-->
@@ -21,12 +27,9 @@
 <!-- video -->
 <script src="scripts/scene.js"></script>
 
+
 <!-- main -->
 <script src="scripts/main.js"></script>
 
-<body>
-	<button onClick="App.Controller.playSong();">play song</button>
-    <button onClick="App.Controller.changeSphere();">change sphere</button>
-</body>
 
 </html>

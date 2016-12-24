@@ -196,7 +196,7 @@ App.Scene = App.Scene || (function () {
         requestAnimationFrame(animate);
 
         // update scene
-        console.log('analysis: ' + App.Synth.analysis());
+        // console.log('analysis: ' + App.Synth.analysis());
 
         // Render the scene.
         renderer.render(scene, camera);
