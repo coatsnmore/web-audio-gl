@@ -1,6 +1,6 @@
 App.Scene = App.Scene || (function () {
 
-    var scene, renderer, camera,  sphere;
+    var scene, renderer, camera,  sphere, sphere2;
 
     var init = function () {
         // Create the scene and set the scene size.
@@ -51,6 +51,31 @@ App.Scene = App.Scene || (function () {
 
     }
 
+    var changeSphere = function (){
+        console.log('radius: ' + sphere.geometry.radius);
+        sphere.geometry.dispose();
+
+        var radius, segements, rings;
+
+        if( sphere.size == 'big'){
+            radius = 1;
+            segments = 8;
+            rings = 8;
+            sphere.size = 'small';
+        } else {
+            radius = 3;
+            segments = 8;
+            rings = 8;
+            sphere.size = 'big';
+        }
+
+         var geometry = new THREE.SphereGeometry(
+            radius,
+            segments,
+            rings);
+        sphere.geometry = geometry;
+    }
+
     var addSphere = function () {
         const sphereMaterial =
             new THREE.MeshLambertMaterial(
@@ -82,6 +107,8 @@ App.Scene = App.Scene || (function () {
         // can see it.
         sphere.position.z = 0;
 
+        sphere.size = 'big';
+
         // Finally, add the sphere to the scene.
         scene.add(sphere);
     }
@@ -109,17 +136,17 @@ App.Scene = App.Scene || (function () {
         geometry.dynamic = true;
         geometry.verticesNeedUpdate = true;
 
-        sphere = new THREE.Mesh(
+        sphere2 = new THREE.Mesh(
             geometry,
             sphereMaterial);
 
         // Move the Sphere back in Z so we
         // can see it.
-        sphere.position.z = -5;
-        sphere.position.z = -5;
+        sphere2.position.z = -5;
+        sphere2.position.z = -5;
 
         // Finally, add the sphere to the scene.
-        scene.add(sphere);
+        scene.add(sphere2);
     }
 
     var animate = function () {
@@ -132,5 +159,5 @@ App.Scene = App.Scene || (function () {
 
     }
 
-    return { init: init, animate: animate };
+    return { init: init, animate: animate, changeSphere: changeSphere };
 })();
