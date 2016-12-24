@@ -5,7 +5,7 @@ App.Controller.playSong = function () {
     App.Synth.playSong();
 };
 
-App.Controller.changeSphere = function (){
+App.Controller.changeSphere = function () {
     App.Scene.changeSphere();
 }
 

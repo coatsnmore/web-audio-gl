@@ -83,7 +83,7 @@ App.Scene = App.Scene || (function () {
             SEGMENTS,
             RINGS);
         geometry.dynamic = true;
-        geometry.verticesNeedUpdate= true;
+        geometry.verticesNeedUpdate = true;
 
         sphere = new THREE.Mesh(
             geometry,
