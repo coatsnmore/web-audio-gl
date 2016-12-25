@@ -1,14 +1,17 @@
 <html>
 <!-- Remember.. order matters -->
+
 <body>
 	<button onClick="App.Controller.playSong();">play song</button>
-    <button onClick="App.Controller.changeSphere();">change sphere</button>
-
+	<button onClick="App.Controller.changeSphere();">change sphere</button>
 </body>
-
-
-<canvas id="mycanvas"></canvas>
-<div id="container"></div>
+<div>
+	<canvas id="osc-canvas"></canvas>
+</div>
+<div>
+	<canvas id="bar-canvas"></canvas>
+</div>
+<!--<div id="synth"></div>-->
 
 <!-- libraries-->
 <script src="scripts/lib/three.min.js"></script>
